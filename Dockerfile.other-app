@@ -1,0 +1,12 @@
+FROM node as builder
+
+WORKDIR /build
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN  npm run build:other-app
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "start:other-app"]
